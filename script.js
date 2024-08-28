@@ -1,20 +1,17 @@
-const video = document.getElementById('video')
-let model = `http://127.0.0.1:5500/models`
+const video = document.querySelector('video')
+// let model = `http://127.0.0.1:5500/models`
 Promise.all([
-  faceapi.nets.tinyFaceDetector.loadFromUri(model),
-  faceapi.nets.faceLandmark68Net.loadFromUri(model),
-  faceapi.nets.faceRecognitionNet.loadFromUri(model),
-  faceapi.nets.faceExpressionNet.loadFromUri(model)
+  faceapi.nets.tinyFaceDetector.loadFromUri('./models'),
+  faceapi.nets.faceLandmark68Net.loadFromUri('./models'),
+  faceapi.nets.faceRecognitionNet.loadFromUri('./models'),
+  faceapi.nets.faceExpressionNet.loadFromUri('./models')
 ]).then(startVideo())
 
 function startVideo() {
   navigator.mediaDevices.getUserMedia(
     { video: true }
   ).then(stream => {
-    console.log(stream);
     video.srcObject = stream
-    // err => console.error(err)
-    video.play()
   })
 }
 
